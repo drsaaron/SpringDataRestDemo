@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,9 @@ public class PersonData {
     private String lastName;
     private int age;
     
+    @OneToMany(mappedBy = "personId")
+    private Collection<JobRoleData> roles;
+
     public PersonData(String firstName, String lastName, int age) {
         this.firstName = firstName;
         this.lastName = lastName;
