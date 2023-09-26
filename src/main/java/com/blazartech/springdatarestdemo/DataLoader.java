@@ -8,6 +8,8 @@ import com.blazartech.products.services.date.DateServices;
 import com.blazartech.springdatarestdemo.data.JobRoleData;
 import com.blazartech.springdatarestdemo.data.JobRoleDataRepository;
 import com.blazartech.springdatarestdemo.data.JobRoleType;
+import com.blazartech.springdatarestdemo.data.PersonAddressData;
+import com.blazartech.springdatarestdemo.data.PersonAddressDataRepository;
 import com.blazartech.springdatarestdemo.data.PersonData;
 import com.blazartech.springdatarestdemo.data.PersonDataRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,9 @@ public class DataLoader implements CommandLineRunner {
     private JobRoleDataRepository roleRepo;
     
     @Autowired
+    private PersonAddressDataRepository addressRepo;
+    
+    @Autowired
     private DateServices dateServices;
     
     @Override
@@ -41,6 +46,13 @@ public class DataLoader implements CommandLineRunner {
         JobRoleData ceoRole = new JobRoleData(dateServices.parseDate("2023-01-01"), dateServices.parseDate("2023-12-31"), JobRoleType.CEO, p);
         log.info("saving job role {}", ceoRole);
         roleRepo.save(ceoRole);
+        
+        PersonAddressData address = new PersonAddressData();
+        address.setPersonId(p);
+        address.setStateText("phl17");
+        address.setStreetText("123456 aBV");
+        address.setZipCode("1234");
+        addressRepo.save(address);
     }
     
 }

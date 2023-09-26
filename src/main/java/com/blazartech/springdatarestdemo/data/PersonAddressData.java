@@ -8,9 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import java.util.Collection;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,26 +22,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class PersonData {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PersonAddressData {
     
     @Id
     @GeneratedValue
     private Long id;
     
-    private String firstName;
-    private String lastName;
-    private int age;
+    private String streetText;
+    private String stateText;
+    private String zipCode;
     
-    @OneToMany(mappedBy = "personId")
-    private Collection<JobRoleData> roles;
-    
-    @OneToOne(mappedBy = "personId")
-    private PersonAddressData address;
-
-    public PersonData(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-    }
+    @JoinColumn(name = "personId", referencedColumnName = "id")
+    @ManyToOne
+    private PersonData personId;
 }
