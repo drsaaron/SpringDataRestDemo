@@ -16,7 +16,7 @@ echo "searching"
 curl -i $url/search/findByLastName?lastName=Aaron
 
 # add a role
-curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "2023-01-01", "endDate": "2023-12-31", "role": "CEO", "personId": '$newPersonUrl'}' http://localhost:8080/role
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "2023-01-01", "endDate": "2023-12-31", "roleType": "CEO", "personId": '$newPersonUrl'}' http://localhost:8080/role
 
 # add an address
 curl -X POST -H 'Content-Type: application/json' -d '{"streetText": "my street", "stateText": "home", "zipCode": "1234", "personId": '$newPersonUrl'}' http://localhost:8080/address

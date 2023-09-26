@@ -6,6 +6,8 @@ package com.blazartech.springdatarestdemo.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -37,6 +39,7 @@ public class JobRoleData {
     @Temporal(TemporalType.DATE)
     private Date endDate; 
     
+    @Enumerated(EnumType.STRING)
     private JobRoleType roleType;
     
     @JoinColumn(name = "personId", referencedColumnName = "id")
