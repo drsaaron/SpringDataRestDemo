@@ -3,7 +3,7 @@
 url=http://localhost:8080/person
 
 echo "creating user"
-curl -X POST -H 'Content-Type: application/json' -d '{"firstName": "Scott", "lastName": "Aaron", "age": 25}' $url > /tmp/newPerson.out
+curl -X POST -H 'Content-Type: application/json' -d '{"firstName": "Henrietta", "lastName": "Schmoopie", "age": 45}' $url > /tmp/newPerson.out
 newPersonUrl=$(grep href /tmp/newPerson.out | head -1 | awk '{ print $3 }')
 echo "new person URL: $newPersonUrl"
 
