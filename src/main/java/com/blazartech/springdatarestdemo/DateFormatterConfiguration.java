@@ -6,13 +6,13 @@ package com.blazartech.springdatarestdemo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -27,10 +27,11 @@ public class DateFormatterConfiguration {
     private String dateFormat;
 
     @Bean
-    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
-        ObjectMapper mapper = builder
-                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+    public ObjectMapper objectMapper() {
+        JsonMapper mapper = JsonMapper.builder()
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .build();
+
         mapper.setDateFormat(new SimpleDateFormat(dateFormat));
         return mapper;
     }
